@@ -15,16 +15,25 @@ class Solution
     vector<long long> printFibb(int n) 
     {
         //code here
-         long long a=0,b=1;
-        vector<long long>res={1};
-        while(--n)
-        {
+        //  long long a=0,b=1;
+        // vector<long long>res={1};
+        // while(--n)
+        // {
+        //     long long c=a+b;
+        //     a=b;
+        //     b=c;
+        //     res.push_back(c);
+        // }
+        // return res;
+        long long a=0,b=1;
+        vector<long long > result={1};
+        while(--n){
             long long c=a+b;
             a=b;
             b=c;
-            res.push_back(c);
+            result.push_back(c);
         }
-        return res;
+        return result;
     }
 };
 

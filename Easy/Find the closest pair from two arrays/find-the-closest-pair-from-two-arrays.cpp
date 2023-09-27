@@ -12,26 +12,20 @@ class Solution{
         //code here
         int i=0;
         int j=m-1;
-        int minDiff = INT_MAX;
-        vector<int> ans(2); 
-
-        while (i < n && j >= 0) {
-        int sum = arr[i] + brr[j];
-        int diff = abs(sum - x);   
-
-        if (diff < minDiff) {
-            minDiff = diff;     
-            ans[0] = arr[i];  
-            ans[1] = brr[j]; 
+        int minDiff=INT_MAX;
+        vector<int>ans(2);
+        while(i<n && j>=0){
+            int sum=arr[i]+brr[j];
+            int diff=abs(sum-x);
+            if(diff<minDiff){
+                minDiff=diff;
+                ans[0]=arr[i];
+                ans[1]=brr[j];
+            }
+            if(sum<x) i++;
+            else j--;
         }
-
-        if (sum < x)
-            i++;
-        else
-            j--; 
-    }
-
-    return ans;
+        return ans;
     }
 };
 

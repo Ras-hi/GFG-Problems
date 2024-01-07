@@ -7,36 +7,38 @@ using namespace std;
 class Solution
 {
     public:
-    long long power(long long x,int y, int p)
-    {
-        long long res = 1; // Initialize result
-        while (y > 0)
-        {
-            // If y is odd, multiply x with result
-            if (y & 1)
-                res = (res * x) % p;
-            // y must be even now
-            y = y >> 1; // y = y/2
-            x = (x * x) % p;
-        }
-        return res;
-    }
- 
-    // Returns n^(-1) mod p
-    long long modInverse(long long n,int p)
-    {
-        return power(n, p - 2, p);
-    }
     long long  numberOfPaths(int M, int N)
     {
         // Code Here
-          long long path = 1,mod=1e9+7;
-            for (long long i = N; i < (M + N - 1); i++) {
-            path = (path*i)%mod;
-            long long inv=modInverse(i-N+1,mod);
-            path = (path*inv)%mod;
+           int n=M+N-2;
+        int r=M-1;
+        int modd=1e9+7;
+        long long int paths=1;
+        for(int i=0; i<r; i++)
+        {
+            paths = (paths%modd * ((n - i)%modd))%modd;
+            paths = (paths%modd * inverse(i+1, modd))%modd;
         }
-        return path;
+        return paths;
+    
+    }
+        long long power(long long x, unsigned int y, int p)
+    {
+        long long res = 1; 
+        x = x % p; 
+        while (y > 0) 
+        {
+            if (y & 1)
+                res = (res*x) % p;
+            y = y>>1; 
+            x = (x*x) % p;
+        }
+        return res;
+    }
+
+    long long inverse(int n, int p)
+    {
+        return power(n, p-2, p);
     }
 };
 

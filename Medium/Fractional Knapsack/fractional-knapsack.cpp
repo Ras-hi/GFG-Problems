@@ -22,34 +22,29 @@ class Solution
 {
     public:
     //Function to get the maximum total value in the knapsack.
+    bool static comp(Item a ,Item b){
+        double r1=(double)a.value/(double) a.weight;
+        double r2= (double)b.value/(double) b.weight;
+        return r1>r2;
+    }
     double fractionalKnapsack(int W, Item arr[], int n)
     {
         // Your code here
-        double ans=0;
-       vector<pair<double,int>> v;
-       for(int i=0;i<n;i++){
-           double a=arr[i].value;
-           double b=arr[i].weight;
-           double c=a/b;
-           v.push_back({c,i});
-        //   cout<<c<<endl;
-       }
-       sort(v.begin(),v.end());
-       for(int i=n-1;i>=0;i--){
-           if(W<arr[v[i].second].weight){
-               double a=W;
-               
-               ans+=a*v[i].first;
-               break;
-           }
-           else{
-               ans+=arr[v[i].second].value;
-               W-=arr[v[i].second].weight;
-           }
-        //   cout<<W<<endl;
-       }
-       return ans;
-
+        sort(arr,arr+n,comp);
+        int curweight=0;
+        double finalprofit=0.0;
+        for(int i=0;i<n;i++){
+            if(curweight + arr[i].weight<=W){
+                curweight+=arr[i].weight;
+                finalprofit +=arr[i].value;
+            }
+            else{
+                int remain=W-curweight;
+                finalprofit+=(arr[i].value/(double)arr[i].weight)*( double)remain;
+                break;
+            }
+        }
+        return finalprofit;
     }
         
 };

@@ -4,38 +4,28 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-  public:
-    // Function to return a list containing the DFS traversal of the graph.
-     void DFSUtil(int i, vector<int> adj[], int V, bool vis[],
-                 vector<int> &res) {
-        if (vis[i]) return;
-
-        // marking vertex as visited and adding it to output list.
-        vis[i] = true;
-        res.push_back(i);
-
-        // iterating over connected components of the vertex and if any
-        // of them is not visited then calling the function recursively.
-        for (int j : adj[i]) {
-            if (!vis[j]) DFSUtil(j, adj, V, vis, res);
-        }
-    }
-
-    // Function to return a list containing the DFS traversal of the graph.
-    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
-        // using a boolean list to mark all the vertices as not visited.
-        bool vis[V];
-        memset(vis, false, sizeof(vis));
-
-        vector<int> res;
-        for (int i = 0; i < V; i++) {
-            // if any vertex isn't visited then calling the function.
-            if (!vis[i]) {
-                DFSUtil(i, adj, V, vis, res);
+    private: 
+    void dfs(int node, vector<int> adj[], int vis[], vector<int> &ls) {
+        vis[node] = 1; 
+        ls.push_back(node); 
+        // traverse all its neighbours
+        for(auto it : adj[node]) {
+            // if the neighbour is not visited
+            if(!vis[it]) {
+                dfs(it, adj, vis, ls); 
             }
         }
-        // returning the output list.
-        return res;
+    }
+  public:
+    // Function to return a list containing the DFS traversal of the graph.
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        int vis[V] = {0}; 
+        int start = 0;
+        // create a list to store dfs
+        vector<int> ls; 
+        // call dfs for starting node
+        dfs(start, adj, vis, ls); 
+        return ls;
     }
 };
 

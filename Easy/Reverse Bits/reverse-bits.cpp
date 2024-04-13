@@ -7,18 +7,15 @@ class Solution {
   public:
     long long reversedBits(long long x) {
         // code here
-        long long res = 0 ; 
-        
-        for(int i = 31; i>=0 ; i--){
+        long long res=0;
+        for(int i=31;i>=0;i--){
+            long long digit=x&1;// to get the LSB
+            x=x>>1;// to move the LSB from left to right
+            digit =digit<<i;// excchange the LSB to MSB 
+            res= res|digit ;//updating all the digits 
             
-            long long digit = x & 1; 
-            x = x>>1; 
-            digit = digit << i; 
-            
-            res = res | digit; 
         }
-        
-        return res; 
+        return res;
     }
 };
 

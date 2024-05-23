@@ -10,14 +10,15 @@ class Solution{
 public:	
 	
 	
-	int isPalindrome(string S)
+	int isPalindrome(string s)
 	{
 	    // Your code goes here
-	    int n = S.size();
-	    for(int i = 0; i < n / 2; i++)
-	        if(S[i] != S[n - i - 1])
-	            return false;
-	            
+	    int i=0,j=s.length()-1;
+	    while(i<j){
+	        if(s.at(i)!=s.at(j))
+	            return false ;
+	        i++,j--;
+	    }
 	    return true;
 	}
 

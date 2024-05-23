@@ -7,26 +7,17 @@ class Solution {
   public:
     int isPerfectNumber(long long N) {
         // code here
-        long long sum=0;
-        for(long long i=1;i<=sqrt(N);i++){
-            if(N%i==0 && i!=N){
-                sum+=i;
-                
-            }
-            
-            if((N/i)!=i){
-                if(N%(N/i)==0 && (N/i!=N)){
-                    sum+=(N/i);
-                
+        if(N==1)  return 0;
+        long long int sum =1;
+        for(int i=2;i<=sqrt(N);i++){
+            if(N%i==0){
+                sum +=i;
+                if(i!=sqrt(N)){
+                    sum +=N/i;
                 }
-                
             }
         }
-        
-        if(sum==N){
-            return 1;
-        }
-        return 0;
+        return sum==N;
     }
 };
 

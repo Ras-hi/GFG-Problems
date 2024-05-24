@@ -9,24 +9,35 @@ class Solution{
     bool match(string wild, string pattern)
     {
         // code here
-                int wind=0,pind=0;
-        while(wind<wild.length() or pind<pattern.length()){
-            if(wild[wind]==pattern[pind] or wild[wind]=='?' or wild[wind]=='*'){
-                if(wild[wind]=='*'){
-                        while(wind<wild.length() and (wild[wind]=='?' or wild[wind]=='*')) wind++;
-                        if(wind==wild.length()) return true;
-                        pind++;
-                        while(pattern[pind]!=wild[wind] and pind<pattern.length()) pind++;
-                        if(pind==pattern.length()) return false;
-                }
-                wind++;
-                pind++;
+        int n = wild.size();
+        int m = pattern.size();
+        
+        int i = 0, j = 0;
+        int checkpointWild = -1, checkpointPattern = -1;
+    
+        while (j < m) {
+            if (i < n && (wild[i] == pattern[j] || wild[i] == '?')) {
+                i++;
+                j++;
+            } else if (i < n && wild[i] == '*') {
+                checkpointWild = i;
+                checkpointPattern = j;
+                i++;
+            } else if (checkpointWild != -1) {
+                // Backtrack to the last '*' checkpoint
+                i = checkpointWild + 1;
+                j = checkpointPattern + 1;
+                checkpointPattern++;
+            } else {
+                return false;
             }
-            else return false;
         }
-        if(pind<pattern.length() or wind<wild.length()) return false;
-        return true;
-
+    
+        while (i < n && wild[i] == '*') {
+            i++;
+        }
+    
+        return i == n && j == m;
     }
 };
 

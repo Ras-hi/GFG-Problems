@@ -7,24 +7,17 @@ class Solution{
 public:
     long maximumSumSubarray(int k, vector<int> &a , int n){
         // code here 
-        long int cur_sum = 0;
-        long int max_sum = INT_MIN;
-        int j = 0, i = 0;
-        while(i<n){
-            if(i<k){
-                cur_sum += a[i];
-            }
-            else{
-                max_sum = max(max_sum,cur_sum);
-                cur_sum -= a[j];
-                cur_sum += a[i];
-                j++;
-            }
-            i++;
+        long long sum =0,left=0,maxi=0;
+        for(int i=0;i<k;i++){
+            sum +=a[i];
         }
-        max_sum = max(cur_sum, max_sum);
-        return max_sum;
-
+        long long windowsum =sum ;
+        for(int j =k ;j<n;j++){
+            sum =sum -a[left++]+a[j];
+            windowsum =max(windowsum , sum);
+        }
+        return windowsum ;
+        
     }
 };
 

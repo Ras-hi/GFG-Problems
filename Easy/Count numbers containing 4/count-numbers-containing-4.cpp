@@ -7,21 +7,14 @@ using namespace std;
 
 class Solution {
   public:
-    bool four(int x){
-        while(x>0){
-            if(x%10==4) return true;
-            x/=10;
-        }
-        return false;
-    }
     int countNumberswith4(int n) {
         // code here
-        int cnt=0;
+        int cnt =0;
         for(int i=1;i<=n;i++){
-            if(four(i)){
+            string s =to_string(i);
+            if(s.find('4')!=string::npos){
                 cnt++;
             }
-                
         }
         return cnt;
     }
